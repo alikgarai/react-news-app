@@ -21,13 +21,17 @@ export class News extends Component {
     }
 
     updateNews = async () => {
-        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=ee162550437a496a8e48b90e015e13cc&pageSize=${this.props.pageSize}&page=${this.state.page}`;
+        this.props.setProgress(10);
+        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&pageSize=${this.props.pageSize}&page=${this.state.page}`;
         let data = await fetch(url);
+        this.props.setProgress(30);
         let parsedData = await data.json();
+        this.props.setProgress(70);
         this.setState({
             articles: this.state.articles.concat(parsedData.articles),
             totalResults: parsedData.totalResults
         });
+        this.props.setProgress(100);
     }
 
     async componentDidMount() {
@@ -35,14 +39,18 @@ export class News extends Component {
         // this.updateNews();
         // this.setState({ loading: false });
 
-        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=ee162550437a496a8e48b90e015e13cc&pageSize=${this.props.pageSize}&page=${this.state.page}`;
+        this.props.setProgress(10);
+        let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=${this.props.apiKey}&pageSize=${this.props.pageSize}&page=${this.state.page}`;
         let data = await fetch(url);
+        this.props.setProgress(30);
         let parsedData = await data.json();
+        this.props.setProgress(70);
         this.setState({
             articles: this.state.articles.concat(parsedData.articles),
             totalResults: parsedData.totalResults,
             loading: false
         })
+        this.props.setProgress(100);
     }
 
     fetchMoreData = async () => {
@@ -70,7 +78,7 @@ export class News extends Component {
                                 return (
                                     <div className="col-md-4" key={element.url + index}>
                                         <NewsItem
-                                            title={element.title}
+                                            title={element.title ? element.title : ""}
                                             description={element.description}
                                             imgUrl={element.urlToImage}
                                             newsUrl={element.url}

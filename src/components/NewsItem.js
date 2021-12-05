@@ -3,11 +3,18 @@ import React, { Component } from "react";
 export class NewsItem extends Component {
     render() {
         let { title, description, imgUrl, newsUrl, author, date, source } = this.props;
+        let style = {
+            display: 'flex',
+            justifyContent: 'end',
+            position: 'absolute',
+            right: 0
+        }
         return (
             <div className="card my-3">
-                <span className="position-absolute top-0 translate-middle badge rounded-pill bg-danger" style={{ left: "85%", zIndex: 1 }}>
-                    {source}
-                </span>
+                <div style={style}>
+                    <span className="badge rounded-pill bg-danger">{source}</span>
+                </div>
+
                 <img src={imgUrl} className="card-img-top" alt="..." height="250rem" />
                 <div className="card-body">
                     <h5 className="card-title">{title && title.slice(0, 45)}...</h5>
