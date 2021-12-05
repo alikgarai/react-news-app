@@ -5,7 +5,7 @@ import { Routes, Route } from "react-router-dom";
 
 export class App extends Component {
   render() {
-    let pageSize = 5;
+    let pageSize = 25;
     return (
       <div>
         {/* <Router> moved to index.js */}
